@@ -131,6 +131,12 @@ export default function Conclusion({ isNight, isPresentationMode }: ConclusionPr
           </div>
         </motion.div>
 
+        {/* School reference credits block */}
+        <div className="text-center opacity-40 space-y-1 text-xs font-mono text-slate-400">
+          <div>Präsentationsunterlage • Biologie Q1-Grundkurs / Leistungskurs</div>
+          <div>Thema: Ökologie extremer Lebensräume — Ökosystem Wüste</div>
+        </div>
+
       </div>
     </section>
   );
