@@ -34,105 +34,99 @@ export default function HumanImpact({ isNight, isPresentationMode }: HumanImpact
   return (
     <section 
       id="mensch-und-wueste" 
-      className={`py-20 px-4 md:px-8 transition-colors duration-1000 ${
-        isNight ? 'bg-slate-900 text-slate-100' : 'bg-amber-50/40 text-sand-950'
+      className={`py-24 px-4 md:px-8 relative overflow-hidden transition-colors duration-1000 ${
+        isNight ? 'bg-[#020617] text-slate-100' : 'bg-[#080705] text-amber-50'
       }`}
     >
-      <div className="max-w-7xl mx-auto space-y-16">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-10">
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-red-500/10 filter blur-[120px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-emerald-500/10 filter blur-[150px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         
         {/* Section Header */}
         <div className="text-center space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-mono font-bold uppercase tracking-widest bg-red-100 text-red-800">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-widest bg-red-500/10 text-red-400 border border-red-500/20">
+            <ShieldAlert className="w-3.5 h-3.5 text-red-400 animate-pulse" />
             Anthropogener Einfluss
           </div>
-          <h2 className={`font-display text-3xl md:text-5xl font-bold tracking-tight uppercase ${
-            isNight ? 'text-white' : 'text-sand-900'
-          }`}>
+          <h2 className="font-sans font-black text-3xl md:text-5xl tracking-tight uppercase text-white">
             7. Der Mensch verändert die Wüste
           </h2>
-          <div className="h-1.5 w-24 bg-red-500 mx-auto rounded-full" />
-          <p className="text-sm md:text-base opacity-75 max-w-2xl mx-auto">
-            Ökologisches Gleichgewicht am Abgrund. Untersuche die fatalen Folgen menschlicher Eingriffe und wegbereitende Lösungsstrategien.
+          <div className="h-1 w-24 bg-gradient-to-r from-red-500 via-orange-500 to-emerald-500 mx-auto rounded-full" />
+          <p className="text-sm md:text-base text-slate-300 max-w-2xl mx-auto">
+            Ökologisches Gleichgewicht am Abgrund. Untersuche die fatalen Folgen menschlicher Eingriffe und die visionären, nachhaltigen Rettungskonzepte.
           </p>
         </div>
 
         {/* Visual Before/After Sandbox comparison */}
-        <div className={`p-6 md:p-8 rounded-3xl border shadow-2xl transition-all duration-500 ${
-          isNight ? 'bg-slate-950/80 border-slate-800' : 'bg-white border-amber-200 shadow-lg'
-        }`}>
+        <div className="p-6 md:p-10 rounded-3xl border border-white/5 bg-slate-900/20 backdrop-blur-md shadow-2xl relative overflow-hidden">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Simulation Controls & Explanation */}
             <div className="lg:col-span-5 space-y-6">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-500">
-                OASEN-SIMULATION
+              <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-red-400">
+                ECO-OASIS LABORATORY
               </span>
-              <h3 className={`font-display text-2xl font-bold ${
-                isNight ? 'text-white' : 'text-sand-900'
-              }`}>
-                Ökosystem-Vergleich: <br />
+              <h3 className="font-sans font-black text-2xl md:text-3xl text-white tracking-tight leading-tight uppercase">
+                Zustands-Vergleich: <br />
                 {oasisState === 'healthy' ? (
-                  <span className="text-emerald-500">Naturbelassenes Gleichgewicht</span>
+                  <span className="text-emerald-400 font-black drop-shadow-[0_2px_10px_rgba(16,185,129,0.2)]">Natürliche Balance</span>
                 ) : (
-                  <span className="text-red-500">Anthropogene Übernutzung</span>
+                  <span className="text-red-500 font-black drop-shadow-[0_2px_10px_rgba(239,68,68,0.2)]">Überlastung</span>
                 )}
               </h3>
               
-              <p className={`text-sm leading-relaxed opacity-85 ${
+              <p className={`text-xs md:text-sm leading-relaxed text-slate-300 ${
                 isPresentationMode ? 'font-medium' : ''
               }`}>
                 {oasisState === 'healthy' 
-                  ? 'Im naturbelassenen Zustand bildet die Oase eine üppige Lebensader. Das Zusammenspiel aus reiner Wasserquelle, reichhaltiger Krautflora und schattenspenden Dattelpalmen bietet Hunderten Insekten-, Vogel- und Säugetierarten eine Zuflucht. Die Biodiversität ist auf dem Höchststand.'
-                  : 'Durch exzessive Überweidung und unkontrolliertes Grundwasser-Pumpen bricht das fragile Netz zusammen. Der Wasserpegel sinkt drastisch, Palmen verdorren, Krautdecken weichen nacktem Wüstenlack. Plastikmüll und Schutt belasten den Raum. Die Arten wandern ab oder sterben.'
+                  ? 'Im intakten Zustand gedeiht die Oase als üppige Lebensader. Das harmonische Miteinander aus reinem Wasser, dichter Vegetation und schattenspendenden Baumkronen schützt das Mikroklima. Biodiversität und Vitalität erreichen ein absolutes Maximum.'
+                  : 'Exzessive Abpumpung fossiler Grundwasservorkommen und ungebremste Überweidung lassen das fragile Gefüge kollabieren. Der Wasserspiegel sinkt unaufhaltsam ab, nackter Boden erodiert, und die spezialisierte Flora verdorrt.'
                 }
               </p>
 
-              {/* State Buttons */}
-              <div className="flex gap-3">
+              {/* State Buttons with improved touch targets & visual indicator */}
+              <div className="flex gap-4">
                 <button
                   id="btn-oasis-healthy"
                   onClick={() => setOasisState('healthy')}
-                  className={`flex-1 py-3 px-4 rounded-xl font-display text-xs font-bold tracking-wide uppercase transition-all duration-300 border flex items-center justify-center gap-2 ${
+                  className={`flex-1 py-4 px-4 rounded-2xl font-sans text-xs font-bold tracking-wider uppercase transition-all duration-300 border flex items-center justify-center gap-2 cursor-pointer active:scale-95 ${
                     oasisState === 'healthy'
-                      ? 'bg-emerald-500 border-emerald-400 text-white shadow-md shadow-emerald-500/20 scale-102'
-                      : isNight
-                        ? 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'
-                        : 'bg-amber-50 border-amber-200 text-sand-800 hover:border-amber-300'
+                      ? 'bg-emerald-500 border-emerald-400 text-white shadow-lg shadow-emerald-500/20'
+                      : 'bg-white/[0.02] border-white/5 text-slate-400 hover:text-white hover:border-white/10'
                   }`}
                 >
                   <Sprout className="w-4 h-4" />
-                  <span>1. Gesunde Oase</span>
+                  <span>1. Gesund</span>
                 </button>
                 <button
                   id="btn-oasis-damaged"
                   onClick={() => setOasisState('damaged')}
-                  className={`flex-1 py-3 px-4 rounded-xl font-display text-xs font-bold tracking-wide uppercase transition-all duration-300 border flex items-center justify-center gap-2 ${
+                  className={`flex-1 py-4 px-4 rounded-2xl font-sans text-xs font-bold tracking-wider uppercase transition-all duration-300 border flex items-center justify-center gap-2 cursor-pointer active:scale-95 ${
                     oasisState === 'damaged'
-                      ? 'bg-red-500 border-red-400 text-white shadow-md shadow-red-500/20 scale-102'
-                      : isNight
-                        ? 'bg-slate-900 border-slate-800 text-slate-400 hover:border-slate-700'
-                        : 'bg-amber-50 border-amber-200 text-sand-800 hover:border-amber-300'
+                      ? 'bg-red-500 border-red-400 text-white shadow-lg shadow-red-500/20'
+                      : 'bg-white/[0.02] border-white/5 text-slate-400 hover:text-white hover:border-white/10'
                   }`}
                 >
                   <Trash2 className="w-4 h-4" />
-                  <span>2. Übernutzte Oase</span>
+                  <span>2. Zerstört</span>
                 </button>
               </div>
 
               {/* General terms: Biodiversität & Neobiota */}
-              <div className={`p-4 rounded-xl border text-xs leading-relaxed space-y-2 ${
-                isNight ? 'bg-slate-900/60 border-slate-800' : 'bg-red-50/50 border-red-100'
-              }`}>
-                <div className="flex items-center gap-1.5 font-bold uppercase text-[10px] tracking-wide text-orange-600 font-mono">
-                  <AlertTriangle className="w-4 h-4 shrink-0" />
+              <div className="p-4 rounded-2xl border border-white/5 bg-black/40 text-xs leading-relaxed space-y-2">
+                <div className="flex items-center gap-1.5 font-bold uppercase text-[9px] tracking-widest text-orange-400 font-mono">
+                  <AlertTriangle className="w-4 h-4 shrink-0 text-orange-400" />
                   <span>Fachinfo: Biodiversität & Neobiota</span>
                 </div>
-                <p>
-                  <strong>Biodiversität (Biologische Vielfalt)</strong> ist in der Wüste extrem empfindlich. Da Arten stark spezialisiert sind, führt der Verlust eines einzigen Partners (z.B. der Akazie) oft zu Kettenreaktionen.
+                <p className="text-slate-300 text-[11px] leading-relaxed">
+                  <strong>Biodiversität</strong> ist in der Wüste hochsensibel. Da Arten maximal spezialisiert sind, führt der Ausfall eines Schlüsselakteurs (wie der Akazie) oft zum Dominoeffekt im gesamten Nahrungsnetz.
                 </p>
-                <p>
-                  <strong>Neobiota (eingeschleppte Arten)</strong> verschärfen die Krise: Fremde, vom Menschen eingebrachte Pflanzenarten entziehen heimischen Gewächsen die letzte Bodenfeuchte und zerstören so das historische Nahrungsnetz.
+                <p className="text-slate-300 text-[11px] leading-relaxed">
+                  <strong>Neobiota (Invasive Arten)</strong> verschärfen Krisen, indem sie mühsam kultivierte Biotope besiedeln und das indigene Wassermanagement der Wüste ruinieren.
                 </p>
               </div>
 
@@ -140,6 +134,7 @@ export default function HumanImpact({ isNight, isPresentationMode }: HumanImpact
 
             {/* Simulated Visual Art Frame */}
             <div className="lg:col-span-7">
+
               <div className={`relative aspect-video rounded-2xl overflow-hidden border transition-all duration-1000 flex items-center justify-center ${
                 oasisState === 'healthy'
                   ? 'bg-gradient-to-br from-emerald-950 via-teal-900 to-emerald-900 border-emerald-500/30 shadow-lg shadow-emerald-500/5'
@@ -148,10 +143,17 @@ export default function HumanImpact({ isNight, isPresentationMode }: HumanImpact
                 {/* Beautiful cross-fading video elements representing oasis state */}
                 <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                   <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                    autoPlay={true}
+                    loop={true}
+                    muted={true}
+                    playsInline={true}
+                    onLoadedMetadata={(e) => {
+                      const video = e.currentTarget;
+                      video.muted = true;
+                      video.play().catch((err) => {
+                        console.warn("Healthy video autoplay blocked:", err);
+                      });
+                    }}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
                       oasisState === 'healthy' ? 'opacity-40' : 'opacity-0'
                     }`}
@@ -159,10 +161,17 @@ export default function HumanImpact({ isNight, isPresentationMode }: HumanImpact
                     <source src="https://assets.mixkit.co/videos/preview/mixkit-camels-walking-in-the-desert-41567-large.mp4" type="video/mp4" />
                   </video>
                   <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
+                    autoPlay={true}
+                    loop={true}
+                    muted={true}
+                    playsInline={true}
+                    onLoadedMetadata={(e) => {
+                      const video = e.currentTarget;
+                      video.muted = true;
+                      video.play().catch((err) => {
+                        console.warn("Damaged video autoplay blocked:", err);
+                      });
+                    }}
                     className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
                       oasisState === 'damaged' ? 'opacity-35' : 'opacity-0'
                     }`}
@@ -229,63 +238,78 @@ export default function HumanImpact({ isNight, isPresentationMode }: HumanImpact
         </div>
 
         {/* Breakdown tables: Eingriffe vs Folgen vs Lösungen */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* Eingriffe */}
-          <div className={`p-6 rounded-2xl border ${
-            isNight ? 'bg-slate-950/60 border-slate-800' : 'bg-white border-amber-200 shadow-sm'
-          }`}>
-            <div className="flex items-center gap-2 mb-4">
-              <ShieldAlert className="w-5 h-5 text-red-500 shrink-0" />
-              <h4 className={`font-display font-bold ${isPresentationMode ? 'text-lg' : 'text-sm'} uppercase tracking-wide`}>
+          <div className="p-6 md:p-8 rounded-3xl border border-red-500/10 bg-slate-900/40 backdrop-blur-md shadow-xl hover:border-red-500/20 transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-red-500" />
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2.5 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20">
+                <ShieldAlert className="w-5 h-5 shrink-0" />
+              </div>
+              <h4 className="font-sans font-black text-base md:text-lg uppercase tracking-wider text-white">
                 Menschliche Eingriffe
               </h4>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {humanInterventions.map((item, idx) => (
-                <li key={idx} className="space-y-0.5">
-                  <span className="text-xs font-bold text-red-500 font-mono block">• {item.title}</span>
-                  <p className="text-xs opacity-80 leading-relaxed pl-3">{item.text}</p>
+                <li key={idx} className="space-y-1">
+                  <span className="text-xs font-black text-red-400 font-sans tracking-wide block">
+                    {item.title}
+                  </span>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {item.text}
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Folgen */}
-          <div className={`p-6 rounded-2xl border ${
-            isNight ? 'bg-slate-950/60 border-slate-800' : 'bg-white border-amber-200 shadow-sm'
-          }`}>
-            <div className="flex items-center gap-2 mb-4">
-              <TrendingDown className="w-5 h-5 text-orange-500 shrink-0" />
-              <h4 className={`font-display font-bold ${isPresentationMode ? 'text-lg' : 'text-sm'} uppercase tracking-wide`}>
+          <div className="p-6 md:p-8 rounded-3xl border border-orange-500/10 bg-slate-900/40 backdrop-blur-md shadow-xl hover:border-orange-500/20 transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-orange-500" />
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2.5 rounded-xl bg-orange-500/10 text-orange-400 border border-orange-500/20">
+                <TrendingDown className="w-5 h-5 shrink-0" />
+              </div>
+              <h4 className="font-sans font-black text-base md:text-lg uppercase tracking-wider text-white">
                 Ökologische Folgen
               </h4>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {ecologicalConsequences.map((item, idx) => (
-                <li key={idx} className="space-y-0.5">
-                  <span className="text-xs font-bold text-orange-500 font-mono block">• {item.title}</span>
-                  <p className="text-xs opacity-80 leading-relaxed pl-3">{item.text}</p>
+                <li key={idx} className="space-y-1">
+                  <span className="text-xs font-black text-orange-400 font-sans tracking-wide block">
+                    {item.title}
+                  </span>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {item.text}
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
 
           {/* Lösungen (Nachhaltigkeit) */}
-          <div className={`p-6 rounded-2xl border ${
-            isNight ? 'bg-slate-950/60 border-slate-850' : 'bg-emerald-50/20 border-emerald-100 shadow-sm'
-          }`}>
-            <div className="flex items-center gap-2 mb-4">
-              <Sprout className="w-5 h-5 text-emerald-500 shrink-0" />
-              <h4 className={`font-display font-bold ${isPresentationMode ? 'text-lg' : 'text-sm'} uppercase tracking-wide text-emerald-600`}>
+          <div className="p-6 md:p-8 rounded-3xl border border-emerald-500/10 bg-slate-900/40 backdrop-blur-md shadow-xl hover:border-emerald-500/20 transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-emerald-500" />
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <Sprout className="w-5 h-5 shrink-0" />
+              </div>
+              <h4 className="font-sans font-black text-base md:text-lg uppercase tracking-wider text-white">
                 Nachhaltige Lösungen
               </h4>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {sustainabilitySolutions.map((item, idx) => (
-                <li key={idx} className="space-y-0.5">
-                  <span className="text-xs font-bold text-emerald-600 font-mono block">• {item.title}</span>
-                  <p className="text-xs opacity-80 leading-relaxed pl-3">{item.text}</p>
+                <li key={idx} className="space-y-1">
+                  <span className="text-xs font-black text-emerald-400 font-sans tracking-wide block">
+                    {item.title}
+                  </span>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {item.text}
+                  </p>
                 </li>
               ))}
             </ul>

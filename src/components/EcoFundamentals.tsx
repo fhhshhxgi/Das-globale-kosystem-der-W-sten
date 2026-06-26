@@ -269,10 +269,17 @@ export default function EcoFundamentals({ isNight }: EcoFundamentalsProps) {
                       <div className="md:col-span-5 relative rounded-xl overflow-hidden border border-slate-900/60 bg-slate-950 min-h-[150px] md:min-h-full flex items-center justify-center">
                         <video
                           key={factor.id}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
+                          autoPlay={true}
+                          loop={true}
+                          muted={true}
+                          playsInline={true}
+                          onLoadedMetadata={(e) => {
+                            const video = e.currentTarget;
+                            video.muted = true;
+                            video.play().catch((err) => {
+                              console.warn("Factor video autoplay blocked:", err);
+                            });
+                          }}
                           className="absolute inset-0 w-full h-full object-cover opacity-50 hover:opacity-75 transition-opacity duration-500"
                         >
                           <source src={factorVideos[factor.id]} type="video/mp4" />

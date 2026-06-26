@@ -14,11 +14,45 @@ export default function DesertHero({ isNight, onStartExpedition, isPresentationM
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.play().catch((err) => {
-        console.warn("Autoplay blocked or failed:", err);
-      });
+    const video = videoRef.current;
+    if (video) {
+      // Force muted and playsinline to satisfy iOS Safari autoplay conditions
+      video.muted = true;
+      video.playsInline = true;
+
+      const playVideo = () => {
+        video.play().catch((err) => {
+          console.warn("Autoplay blocked or failed:", err);
+        });
+      };
+
+      // Try playing immediately on mount
+      playVideo();
+
+      // Safari fallback: Start on first user gesture anywhere on screen
+      const handleGesture = () => {
+        if (video.paused) {
+          video.play()
+            .then(() => cleanup())
+            .catch((err) => console.warn("Gesture play failed:", err));
+        } else {
+          cleanup();
+        }
+      };
+
+      const cleanup = () => {
+        document.removeEventListener('touchstart', handleGesture);
+        document.removeEventListener('click', handleGesture);
+        document.removeEventListener('keydown', handleGesture);
+      };
+
+      document.addEventListener('touchstart', handleGesture, { passive: true });
+      document.addEventListener('click', handleGesture, { passive: true });
+      document.addEventListener('keydown', handleGesture, { passive: true });
+
+      return () => {
+        cleanup();
+      };
     }
   }, []);
 
@@ -28,10 +62,17 @@ export default function DesertHero({ isNight, onStartExpedition, isPresentationM
       {/* Cinematic Looping Background Video */}
       <video
         ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
+        autoPlay={true}
+        loop={true}
+        muted={true}
+        playsInline={true}
+        onLoadedMetadata={(e) => {
+          const video = e.currentTarget;
+          video.muted = true;
+          video.play().catch((err) => {
+            console.warn("Play on loaded metadata failed:", err);
+          });
+        }}
         className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none opacity-60"
       >
         <source src="/desert.mp4" type="video/mp4" />
